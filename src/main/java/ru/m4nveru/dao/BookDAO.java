@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import ru.m4nveru.models.Book;
 
 import java.util.List;
@@ -22,12 +21,6 @@ public class BookDAO {
         return jdbcTemplate.query("SELECT b.id, b.title, a.id, a.name, b.year, r.id, r.name, r.birth_year " +
                 "FROM books b JOIN authors a ON b.author_id=a.id" +
                 " LEFT JOIN readers r ON b.reader_id = r.id", new BeanPropertyRowMapper<>(Book.class));
-    }
-
-    public List<Book> getReaderBooks(int readerId){
-        return jdbcTemplate.query("SELECT b.id, b.title, a.id, a.name, b.year, r.id, r.name, r.birth_year " +
-                "FROM books b JOIN authors a ON b.author_id=a.id" +
-                " JOIN readers r ON b.reader_id = ?", new BeanPropertyRowMapper<>(Book.class), readerId);
     }
 
     public Book get(int id){
