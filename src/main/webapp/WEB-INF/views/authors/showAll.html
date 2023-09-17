@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список авторов</title>
+</head>
+<body>
+<h2>Список авторов:</h2>
+<div th:each="author : ${authors}">
+    <a th:href="@{/authors/{id} (id=${author.getId()})}" th:text="${author.getName()}">Автор</a>
+</div>
+
+<br>
+<hr>
+<a href="/authors/new">Добавить нового автора</a>
+</body>
+</html>

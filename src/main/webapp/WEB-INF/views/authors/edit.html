@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение информации об авторе</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/authors/{id} (id=${author.getId()})}" th:object="${author}">
+    <label for="name">ФИО</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="accent-color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка редактирования</div>
+    <br/>
+    <br/>
+    <input type="submit" value="Изменить"/>
+</form>
+</body>
+</html>
