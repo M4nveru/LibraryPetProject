@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${reader.getName()}"></title>
+</head>
+<body>
+<p th:text="${reader.getName()} + ', ' + ${reader.getBirth_year()}">Имя читателя, год рождения</p>
+
+<div th:switch="${books.isEmpty()}">
+    <p th:case="true"><em>Читатель пока не взял ни одной книги</em></p>
+    <div th:case="false">
+        <hr>
+        <h2>Книги:</h2>
+        <div th:each="book : ${books}">
+            <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()}
+            + ', ' + ${book.getAuthor().getName()} + ', ' + ${book.getYear()}">Книга</a>
+        </div>
+    </div>
+</div>
+
+<hr>
+<a th:href="@{/readers/{id}/edit (id=${reader.getId()})}">
+    <button>Редактировать</button>
+</a>
+<br>
+<form th:method="DELETE" th:action="@{/readers/{id}(id=${reader.getId()})}">
+    <button>Удалить</button>
+</form>
+</body>
+</html>

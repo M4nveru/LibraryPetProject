@@ -8,6 +8,7 @@ import ru.m4nveru.models.Book;
 import ru.m4nveru.models.Reader;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ReaderDAO {
@@ -25,6 +26,11 @@ public class ReaderDAO {
     public Reader get(int id){
         return jdbcTemplate.query("SELECT * FROM readers WHERE id=?", new BeanPropertyRowMapper<>(Reader.class), id)
                 .stream().findAny().orElse(null);
+    }
+
+    public Optional<Reader> get(String name, int year){
+        return jdbcTemplate.query("SELECT * FROM readers WHERE name=? and birth_year=?", new BeanPropertyRowMapper<>(Reader.class), name, year)
+                .stream().findAny();
     }
 
     public List<Book> getReaderBooks(int readerId){

@@ -1,10 +1,6 @@
 package ru.m4nveru.models;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-
-import java.util.Scanner;
+import jakarta.validation.constraints.*;
 
 public class Reader {
     private int id;
@@ -12,7 +8,8 @@ public class Reader {
     @NotEmpty(message = "Имя не должно быть пустым")
     @Size(min = 3, max = 100, message = "Имя должно состоять из 3 и более символов (не больше 100)")
     private String name;
-    @Pattern(regexp = "(19\\d\\d)|(20\\d\\d)", message = "Год рождения должен быть валидным")
+    @Min(value = 1900, message = "Год должен быть валидным")
+    @Max(value = 2023, message = "Год должен быть валидным")
     private int birth_year;
 
     public Reader() {
