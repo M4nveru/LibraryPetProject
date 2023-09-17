@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:fragment="contentheader(title)" th:assert="${author.getName()}">
+<head>
     <meta charset="UTF-8">
+    <title th:text="${author.getName()}"></title>
 </head>
 <body>
 <p th:text="${author.getName()}">Имя автора</p>
-<hr>
 
 <div th:switch="${books.isEmpty()}">
-    <p th:case="true">У автора нет книг</p>
+    <p th:case="true"><em>У автора нет книг</em></p>
     <div th:case="false">
+        <hr>
         <h2>Книги:</h2>
          <div th:each="book : ${books}">
-             <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()}">Книга</a>
+             <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()} + ', ' + ${book.getYear()}">Книга, год</a>
          </div>
     </div>
 </div>

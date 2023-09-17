@@ -7,7 +7,7 @@
 <body>
 <h2>Добавление автора</h2>
 <form th:method="POST" th:action="@{/authors}" th:object="${author}">
-  <label for="name">ФИО</label>
+  <label for="name">ФИО или псведоним</label>
   <input type="text" th:field="*{name}" id="name">
   <div style="accent-color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Содержание ошибки</div>
   <br/>
