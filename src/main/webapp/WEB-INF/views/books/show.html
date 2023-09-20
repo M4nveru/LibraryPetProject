@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${book.getTitle()}"></title>
+</head>
+<body>
+<p th:text="${book.getTitle()} + ', ' + ${book.getYear()}">Название книги, год</p>
+<div>Автор:
+  <a th:href="@{/authors/{id} (id=${book.getAuthor().getId()})} " th:text="${book.getAuthor().getName()}">Автор</a>
+</div>
+<hr>
+<div th:if="${book.getReader() == null}">
+  <p><em>Книга свободна</em></p>
+  <form th:method="PATCH" th:action="@{/books/{id} (id=${book.getId()})}">
+    <label for="reader">Выберите читателя: </label>
+    <select th:object="${book}" th:field="*{reader.id}" id="reader">
+      <option th:each="reader : ${readers}" th:value="${reader.getId()}"
+              th:text="${reader.getName()}"></option>
+    </select>
+    <input type="submit" value="Назначить книгу">
+  </form>
+</div>
+<div th:if="${book.getReader().getId() != 0 && book.getReader()!= null}">
+  <p><em>Книга выдана</em></p>
+  <p>Книга сейчас у: <a th:href="@{/readers/{id} (id=${book.getReader().getId()})}" th:text="${book.getReader().getName()}">Читатель</a></p>
+  <form th:method="PATCH" th:action="@{/books/{id} (id=${book.getId()})}">
+    <input type="submit" value="Освободить">
+  </form>
+</div>
+
+<hr>
+<a th:href="@{/books/{id}/edit (id=${book.getId()})}">
+  <button>Редактировать</button>
+</a>
+<br>
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+  <button>Удалить</button>
+</form>
+</body>
+</html>

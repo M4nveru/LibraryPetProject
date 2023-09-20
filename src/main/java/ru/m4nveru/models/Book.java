@@ -1,17 +1,15 @@
 package ru.m4nveru.models;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Book {
     private int id;
-    @NotEmpty(message = "Название книги не может быть пустым")
+    @NotEmpty()
     @Size(min = 1, message = "Название книги должно состоять из 1 и более символов")
     private String title;
-    @NotEmpty(message = "Необходимо выбрать автора книги")
     private Author author;
-    @Pattern(regexp = "(\\d{3})|(\\d{4})", message = "Год книги должен быть валидным")
+    @Min(value = 1, message = "Год должен быть валидным")
+    @Max(value = 2023, message = "Год должен быть валидным")
     private int year;
     private Reader reader;
 
