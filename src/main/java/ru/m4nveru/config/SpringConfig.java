@@ -24,7 +24,7 @@ import static java.util.Objects.*;
 @Configuration
 @ComponentScan("ru.m4nveru")
 @EnableWebMvc
-@PropertySource("classpath:database.properties")
+@PropertySource("classpath:sqlite.properties")
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
     private final Environment environment;
@@ -67,8 +67,8 @@ public class SpringConfig implements WebMvcConfigurer {
 
         dataSource.setDriverClassName(requireNonNull(environment.getProperty("driver")));
         dataSource.setUrl(environment.getProperty("url"));
-        dataSource.setUsername(environment.getProperty("user"));
-        dataSource.setPassword(environment.getProperty("password"));
+//        dataSource.setUsername(environment.getProperty("user"));
+//        dataSource.setPassword(environment.getProperty("password"));
         return dataSource;
     }
 
