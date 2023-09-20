@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение информации об авторе</title>
+	<link rel="stylesheet" href="../css/edit.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/authors/{id} (id=${author.getId()})}" th:object="${author}" class="form">
+
+	<div class="edit_"> 
+		<div class="up">
+			<label for="name" class="name">ФИО или псевдоним</label>
+			<input type="text" th:field="*{name}" id="name" class="input">
+		</div>
+	
+		<div style="accent-color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">
+			<p class="err_name">Ошибка имени </p>
+		</div>
+		
+		<div class="but">
+			<input type="submit" value="Изменить" class="but_but">
+		</div>
+	</div>
+    
+</form>
+</body>
+</html>
