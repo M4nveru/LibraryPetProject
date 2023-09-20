@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.m4nveru.models.Author;
 import ru.m4nveru.models.Book;
+import ru.m4nveru.models.Reader;
+import ru.m4nveru.util.BookRowMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +15,12 @@ import java.util.Optional;
 @Component
 public class AuthorDAO{
     private final JdbcTemplate jdbcTemplate;
+    private final ReaderDAO readerDAO;
 
     @Autowired
-    public AuthorDAO(JdbcTemplate jdbcTemplate) {
+    public AuthorDAO(JdbcTemplate jdbcTemplate, ReaderDAO readerDAO) {
         this.jdbcTemplate = jdbcTemplate;
+        this.readerDAO = readerDAO;
     }
 
     public List<Author> getAll(){
@@ -34,10 +38,12 @@ public class AuthorDAO{
     }
 
     public List<Book> getAuthorBooks(int authorId){
-        return jdbcTemplate.query("SELECT b.id, b.title, a.id, a.name, b.year, r.id, r.name, r.birth_year " +
-                        "FROM books b JOIN authors a ON b.author_id=?" +
-                        " LEFT JOIN readers r ON b.reader_id = r.id",
-                new BeanPropertyRowMapper<>(Book.class), authorId);
+        return jdbcTemplate.query("SELECT * FROM books WHERE author_id=?",
+                new BookRowMapper(this, readerDAO), authorId);
+    }
+
+    public List<Author> getRecentAuthors(){
+        return jdbcTemplate.query("SELECT * FROM authors ORDER BY id DESC LIMIT 5", new BeanPropertyRowMapper<>(Author.class));
     }
 
     public void create(Author author){
