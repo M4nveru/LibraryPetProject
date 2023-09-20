@@ -2,6 +2,7 @@ package ru.m4nveru.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,15 +46,21 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public String showAuthor(@PathVariable("id") int id, Model model){
-        model.addAttribute("author", authorDAO.get(id));
-        model.addAttribute("books", authorDAO.getAuthorBooks(id));
-        return "/authors/show";
+        if (authorDAO.get(id)!=null){
+            model.addAttribute("author", authorDAO.get(id));
+            model.addAttribute("books", authorDAO.getAuthorBooks(id));
+            return "/authors/show";
+        }
+        return "redirect:/authors";
     }
 
     @GetMapping("/{id}/edit")
     public String editAuthor(@PathVariable("id") int id, Model model){
-        model.addAttribute("author", authorDAO.get(id));
-        return "/authors/edit";
+        if (authorDAO.get(id)!=null){
+            model.addAttribute("author", authorDAO.get(id));
+            return "/authors/edit";
+        }
+        return "redirect:/authors";
     }
 
     @PatchMapping("/{id}")
@@ -67,8 +74,16 @@ public class AuthorController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteAuthor(@PathVariable("id") int id){
-        authorDAO.delete(id);
-        return "redirect:/authors";
+    public String deleteAuthor(@PathVariable("id") int id, Model model){
+        try {
+            authorDAO.delete(id);
+            return "redirect:/authors";
+        }
+        catch (DataIntegrityViolationException e){
+            model.addAttribute("author", authorDAO.get(id));
+            model.addAttribute("books", authorDAO.getAuthorBooks(id));
+            model.addAttribute("errors", "Ошибка удаления: у автора имеются книги");
+            return "/authors/show";
+        }
     }
 }
