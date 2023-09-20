@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+</head>
+<body>
+<h2>Добро пожаловать в веб-сервис библиотеки!</h2>
+<a th:href="@{/books}">Книги</a>
+<a th:href="@{/authors}">Авторы</a>
+<a th:href="@{/readers}">Читатели</a>
+<h3>Недавно добавленные книги:</h3>
+<div th:each="book : ${recentBooks}">
+  <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.title} + ', ' + ${book.author.name} + ', ' + ${book.year}">Книга</a>
+</div>
+<h3>Новые авторы:</h3>
+<div th:each="author : ${recentAuthors}">
+  <a th:href="@{/authors/{id} (id=${author.getId()})}" th:text="${author.name}">Автор</a>
+</div>
+<h3>Новые читатели:</h3>
+<div th:each="reader : ${recentReaders}">
+  <a th:href="@{/readers/{id} (id=${reader.getId()})}" th:text="${reader.name} + ', ' + ${reader.birth_year}">Читатель</a>
+</div>
+</body>
+</html>
