@@ -11,10 +11,9 @@
     <p th:case="true"><em>Читатель пока не взял ни одной книги</em></p>
     <div th:case="false">
         <hr>
-        <h2>Книги:</h2>
+        <h3>Книги:</h3>
         <div th:each="book : ${books}">
-            <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()}
-            + ', ' + ${book.getAuthor().getName()} + ', ' + ${book.getYear()}">Книга</a>
+            <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()} + ', ' + ${book.getAuthor().getName()} + ', '+ ${book.getYear()}">Книга</a>
         </div>
     </div>
 </div>
@@ -27,5 +26,8 @@
 <form th:method="DELETE" th:action="@{/readers/{id}(id=${reader.getId()})}">
     <button>Удалить</button>
 </form>
+<div style="accent-color: red" th:if="${errors}">
+    <p th:text="${errors}"></p>
+</div>
 </body>
 </html>
