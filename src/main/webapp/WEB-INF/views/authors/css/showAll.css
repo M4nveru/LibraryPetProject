@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: rgb(231,156,219);
+    background: linear-gradient(180deg, rgba(231,156,219,1) 1%, rgba(213,53,187,1) 40%, rgba(207,139,196,1) 120%, rgba(164,91,152,1) 100%);
+}
+
+.authors {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
+}
+
+.authors_link {
+    border: 1px solid;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.add_link {
+    text-decoration: none;
+    color: black;
+    border: 1px solid;
+    padding: 10px 15px;
+    border-radius: 5px 20px 20px 5px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.add_aut {
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
+.up {
+    margin-left: 15px;
+}
