@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${author.getName()}"></title>
+    <link rel="stylesheet" href="../css/show.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
-<h3 th:text="${author.getName()}">Имя автора</h3>
+<h2 th:text="${author.getName()}" class="title">Имя автора</h2>
 
 <div th:switch="${books.isEmpty()}">
-    <p th:case="true"><em>У автора нет книг</em></p>
-    <div th:case="false">
-        <hr>
-        <p>Книги:</p>
-         <div th:each="book : ${books}">
-             <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()} + ', ' + ${book.getYear()}">Книга, год</a>
+    <p th:case="true" class="pre_no"><em class="no_books">У автора нет книг</em></p>
+    <div th:case="false" class="books_div">
+        <p class="books">Книги:</p>
+         <div th:each="book : ${books}" class="books_years">
+             <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()} + ', ' + ${book.getYear()}" class="years">Книга, год</a>
          </div>
     </div>
 </div>
 
-<hr>
-<a th:href="@{/authors/{id}/edit (id=${author.getId()})}">
-  <button>Редактировать</button>
-</a>
-<br>
-<form th:method="DELETE" th:action="@{/authors/{id}(id=${author.getId()})}">
-  <button>Удалить</button>
-</form>
-<div style="accent-color: red" th:if="${errors}">
-    <p th:text="${errors}"></p>
+<div class="buttons">
+    <a th:href="@{/authors/{id}/edit (id=${author.getId()})}">
+      <button class="but_1">Редактировать</button>
+    </a>
+    <form th:method="DELETE" th:action="@{/authors/{id}(id=${author.getId()})}">
+      <button class="but_2">Удалить</button>
+    </form>
+    <div style="accent-color: red" th:if="${errors}">
+        <p th:text="${errors}"></p>
+    </div>
 </div>
+
 </body>
 </html>
