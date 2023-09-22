@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Список книг</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/show.css"
 </head>
 <body>
-<h2>Список книг:</h2>
-<div th:each="book : ${books}">
+<h2 class="showAll_h2">Список книг:</h2>
+<div th:each="book : ${books}" class="showAll_div">
     <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.getTitle()}
             + ', ' + ${book.getAuthor().getName()} + ', ' + ${book.getYear()}">Книга</a>
 </div>
 
 <br>
-<hr>
-<a href="/books/new">Добавить новую книгу</a>
+<br>
+<a href="./new.html" class="showAll_link">Добавить новую книгу</a>
 </body>
 </html>

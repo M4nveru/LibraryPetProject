@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Изменение информации о книге</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/edit.css"
 </head>
 <body>
+
 <form th:method="PATCH" th:action="@{/books/{id}/edit (id=${book.getId()})}" th:object="${book}">
   <label for="title">Название</label>
   <input type="text" th:field="*{title}" id="title">
@@ -16,12 +21,13 @@
             th:text="${author.getName()}"></option>
   </select>
   <br/>
-  <label for="year">Год</label>
+  <label for="year" class="year">Год</label>
   <input type="text" th:field="*{year}" id="year">
-  <div style="accent-color: red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Ошибка года</div>
+  <div style="accent-color: red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}" >Ошибка года</div>
   <br/>
   <br/>
-  <input type="submit" value="Изменить"/>
+  <input type="submit" value="Изменить" class="but_change"/>
 </form>
+
 </body>
 </html>

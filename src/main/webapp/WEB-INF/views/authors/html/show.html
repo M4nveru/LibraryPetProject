@@ -26,7 +26,7 @@
       <button class="but_1">Редактировать</button>
     </a>
     <form th:method="DELETE" th:action="@{/authors/{id}(id=${author.getId()})}">
-      <button class="but_2">Удалить</button>
+      <button class="but_1">Удалить</button>
     </form>
     <div style="accent-color: red" th:if="${errors}">
         <p th:text="${errors}"></p>
