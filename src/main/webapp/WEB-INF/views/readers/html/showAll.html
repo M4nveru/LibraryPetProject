@@ -3,15 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Список читателей</title>
+  <link rel="stylesheet" href="../css/showAll.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
 </head>
 <body>
-<h2>Список читателей:</h2>
-<div th:each="reader : ${readers}">
-  <a th:href="@{/readers/{id} (id=${reader.getId()})}" th:text="${reader.getName()} + ', ' + ${reader.getBirth_year()}">Читатель</a>
-</div>
 
-<br>
-<hr>
-<a href="/readers/new">Добавить нового читателя</a>
+
+  <div class="up">
+    <h2 class="title">Список читателей:</h2>
+  </div>
+
+  <div th:each="reader : ${readers}" class="authors">
+    <a th:href="@{/readers/{id} (id=${reader.getId()})}" th:text="${reader.getName()} + ', ' + ${reader.getBirth_year()}" class="authors_link">Читатель</a>
+  </div>
+
+  <div class="add_aut">
+    <a href="./new.html" class="add_link">Добавить нового читателя</a>
+  </div>
+
 </body>
 </html>

@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+
+body {
+    padding: 0px 20px;
+    background: rgb(222,187,213);
+    background: linear-gradient(180deg, rgba(210,171,224,1) 0%, rgba(231,119,212,1) 50%, rgba(210,171,224,1) 99%);
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main {
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-around;
+    width: 100%;
+}
+.head {
+
+}

@@ -3,23 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Библиотека</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/hp.css"
 </head>
 <body>
-<h2>Добро пожаловать в веб-сервис библиотеки!</h2>
-<a th:href="@{/books}">Книги</a>
-<a th:href="@{/authors}">Авторы</a>
-<a th:href="@{/readers}">Читатели</a>
-<h3>Недавно добавленные книги:</h3>
-<div th:each="book : ${recentBooks}">
-  <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.title} + ', ' + ${book.author.name} + ', ' + ${book.year}">Книга</a>
+
+
+<h2 class="welcome">Добро пожаловать в веб-сервис библиотеки!</h2>
+
+
+<div class="head">
+    <a th:href="@{/books}">Книги</a>
+    <a th:href="@{/authors}">Авторы</a>
+    <a th:href="@{/readers}">Читатели</a>
 </div>
-<h3>Новые авторы:</h3>
-<div th:each="author : ${recentAuthors}">
-  <a th:href="@{/authors/{id} (id=${author.getId()})}" th:text="${author.name}">Автор</a>
+
+<div class="main">
+    <div th:each="book : ${recentBooks}" class="last_book">
+        <h3>Недавно добавленные книги:</h3>
+        <a th:href="@{/books/{id} (id=${book.getId()})}" th:text="${book.title} + ', ' + ${book.author.name} + ', ' + ${book.year}">Книга</a>
+    </div>
+
+
+    <div th:each="author : ${recentAuthors}" class="new_author">
+        <h3>Новые авторы:</h3>
+        <a th:href="@{/authors/{id} (id=${author.getId()})}" th:text="${author.name}">Автор</a>
+    </div>
+
+
+    <div th:each="reader : ${recentReaders}" class="new_reader">
+        <h3>Новые читатели:</h3>
+        <a th:href="@{/readers/{id} (id=${reader.getId()})}" th:text="${reader.name} + ', ' + ${reader.birth_year}">Читатель</a>
+    </div>
 </div>
-<h3>Новые читатели:</h3>
-<div th:each="reader : ${recentReaders}">
-  <a th:href="@{/readers/{id} (id=${reader.getId()})}" th:text="${reader.name} + ', ' + ${reader.birth_year}">Читатель</a>
-</div>
+
+
 </body>
 </html>

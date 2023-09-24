@@ -3,20 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>Добавить читателя</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/edit.css">
 </head>
 <body>
-<h2>Добавление читателя</h2>
-<form th:method="POST" th:action="@{/readers}" th:object="${reader}">
-  <label for="name">ФИО</label>
-  <input type="text" th:field="*{name}" id="name">
-  <div style="accent-color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка имени</div>
-  <br/>
-  <label for="birth_year">Год рождения</label>
-  <input type="text" th:field="*{birth_year}" id="birth_year">
-  <div style="accent-color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}">Ошибка года</div>
-  <br/>
-  <br/>
-  <input type="submit" value="Добавить">
+
+
+
+<form th:method="POST" th:action="@{/readers}" th:object="${reader}" class="form">
+
+  <h2 class="title">Добавление читателя</h2>
+
+  <div class="edit_">
+    <div class="up">
+      <label for="name" class="name">ФИО</label>
+      <input type="text" th:field="*{name}" id="name" class="input">
+    </div>
+
+    <div style="accent-color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">
+      <p class="err_name">Ошибка имени </p>
+    </div>
+
+    <div class="read_edit_main">
+      <label for="birth_year" class="name">Год рождения</label>
+      <input type="text" th:field="*{birth_year}" id="birth_year" class="input">
+    </div>
+
+    <div style="accent-color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}" class="error">
+      <p class="err_year">Ошибка года </p>
+    </div>
+
+    <div class="but">
+      <input type="submit" value="Добавить" class="but_but"/>
+    </div>
+
+  </div>
 </form>
+
 </body>
 </html>
